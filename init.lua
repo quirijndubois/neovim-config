@@ -255,6 +255,24 @@ require('lazy').setup({
     },
   },
 
+  {
+    'github/copilot.vim',
+    config = function()
+      -- start disabled
+      vim.g.copilot_enabled = 0
+      -- make it easy to toggle copilot
+      vim.keymap.set('n', '<leader>cp', function()
+        if vim.g.copilot_enabled == 1 then
+          vim.cmd 'Copilot disable'
+          print 'Copilot disabled'
+        else
+          vim.cmd 'Copilot enable'
+          print 'Copilot enabled'
+        end
+      end, { desc = 'Toggle Copilot' })
+    end,
+  },
+
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
@@ -740,7 +758,7 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'default',
+        preset = 'enter',
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
